@@ -78,3 +78,27 @@ El diagrama general de nuestra solucion es el siguiente, este es un summary de l
 - Fastapi: Utilizamos este framework para realizar la API completa de nuestra aplicacion.
   - Static Website: Esta seccion de la API se usa como server para visualizar la UI desde el browser.
   - API: Esta seccion comunica la UI con los servicios de generacion, previsualizacion y build.
+
+# Google VM:
+
+# Ollama:
+
+# Frontend:
+
+# Build App Backend:
+
+# Fastapi:
+
+# Txt2App:
+
+## Prompt:
+
+## Preview and Test:
+
+## Build and Download:
+
+## Install the App:
+
+# Commentary:
+
+# References:
