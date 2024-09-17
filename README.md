@@ -53,7 +53,7 @@ Presentamos **Txt2App**, la promesa de Huang se convierte en una realidad, acces
 
 <img src="./Images/Txt2App.png" width="300px">
 
-# Diagrams:
+# Diagram and Summary:
 
 El diagrama general de nuestra solucion es el siguiente, este es un summary de los servicios, pero los detallaremos mas adelante.
 
@@ -81,7 +81,106 @@ El diagrama general de nuestra solucion es el siguiente, este es un summary de l
 
 # Google VM:
 
+Seleccionar el tipo de máquina virtual para el proyecto fue una tarea sencilla, especialmente al considerar que Google ofrece una gran variedad de GPU Nvidia. Después de realizar algunas pruebas en el calculador, se decidió utilizar una VM con las siguientes características.
+
+<img src="./Images/vm.png">
+
+<hr>
+
+VM Selection Summary:
+
+| HW/SW  | Selected Value         |
+| ------ | ---------------------- |
+| OS     | Ubuntu 24.04 LTS       |
+| GPU    | Nvidia Tesla T4 (16Gb) |
+| RAM    | 65 Gb                  |
+| HDD    | 500 Gb                 |
+| vCPU   | 10 cores               |
+
+Se utilizo una maquina bastante potente en cuestion de RAM y vCPU ya que teniamos que experimentar la mejor seleccion de modelo LLM y no tener problemas con limitaciones de recursos, esto claro contemplando que no ibamos a utilizar modelos como llama3 405b, los cuales ocupan recuros de HW muy elevados en costos.
+
+## SSH Setup:
+
+Algo importante que hay que configurar para que no tengamos ningun problema en la siguiente seccion, es la configuracion de acceso SSH que que requerimos para configurar la VM y el acceso mediante el Nvidia AI Workbench.
+
+- En nuestra pc local tendremos que crear una RSA Keypair, esto pude realizarse de muchas formas, sin embargo nosotros usaremos el comando `ssh-keygen` de la libreria OpenSSH.
+
+  <img src="./Images/ssh0.png">
+
+- La private key estara ya en nuestra carpeta .shh pero ocuparemos los datos del archivo id_rsa.pub, la que es la clave publica.
+
+  <img src="./Images/ssh0_1.png">
+
+- Iremos a la seccion inferior de la configuracion de VM:
+
+  <img src="./Images/ssh1.png">
+
+- Seleccionamos Advanced Options - Security - Manage Access - Add manually generated SSH keys, ahi colocaremos la public key del archivo id_rsa.pub.
+
+  <img src="./Images/ssh2.png">
+
+- Una vez echo esto ya tendremos todo listo para utilizar la VM sin ningun inconveniente mediante SSH, la ip address de la VM estara disponible despues de unos segundos.
+
+  <img src="./Images/ssh3.png">
+
+# Nvidia AI Workbench:
+
+Ya con la VM configurada tendremos que conectarnos a ella mediante SSH para poder configurarla, esto puedes realizarlo con cualquier programa para ese fin, incluso GC te provee una interfaz web para realizar este proceso sin problema.
+
+## Ubuntu Remote Install: 
+- Abre una terminal SSH en el programa que prefieras (por ejemplo la web ui de GC).
+  <img src="./Images/nw0.png">
+
+- Una vez dentro de la VM pondremos el siguiente comando sin mas.
+
+      mkdir -p $HOME/.nvwb/bin && \
+      curl -L https://workbench.download.nvidia.com/stable/workbench-cli/$(curl -L -s https://workbench.download.nvidia.com/stable/workbench-cli/LATEST)/nvwb-cli-$(uname)-$(uname -m) --output $HOME/.nvwb/bin/nvwb-cli && \
+      chmod +x $HOME/.nvwb/bin/nvwb-cli && \
+      sudo -E $HOME/.nvwb/bin/nvwb-cli install
+
+- Este comando instalara todas las dependencias del Nvidia AI Workbench, pero iremos paso a paso, tendras que aceptar los terminos de uso del programa.
+
+  <img src="./Images/nw1.png">
+
+- Para este proyecto se utilizo Docker, pero tu puedes experimentar con Podman si lo deseas.
+
+  <img src="./Images/nw2.png">
+
+- Recomendamos aqui que se haga la instalacion de los drivers como lo indica Nvidia AI Workbench, en nuestra maquina virtual funciono sin ningun problema.
+  
+  <img src="./Images/nw3.png">
+
+- Empezara el proceso de instalacion, segun tu VM puede tardar menos de 2 min o mas de 5 min como indica Nvidia AI Workbench, sin embargo al usar una VW de Google no habra ningun problema por la velocidad de internet.
+
+  <img src="./Images/nw4.png">
+
+- Una vez terminado todo el proceso se reiniciara la VM, esto cerrara nuestra sesion de SSH, sin embargo ya no sera necesaria, ya podremos acceder desde nuestra Nvidia AI Workbench Local.
+
+  <img src="./Images/nw5.png">
+
+## Local Access: 
+
+Ahora tenemos que configurar las credenciales de accesso a la platafoma en Nvidia AI Workbench local.
+
+- Configura todas las credenciales de acceso como IP de la VM, private key, etc.
+
+  <img src="./Images/nw6.png">
+
+- Si todo funciono correctamente ya tendremos accesso a nuestro server remoto de Nvidia AI Workbench en la VM de google, en el caso de nuestro proyecto seleccionamos New Project.
+
+  <img src="./Images/nw7.png"> 
+
+- Segun las caraterosticas de tu proyecto personal elige el enviroment ideal para ti, en nuestro caso seleccionamos **Python with CUDA 12.2**.
+
+  <img src="./Images/nw8.png"> 
+
+- Si todo salio bien hasta ahora tendras acceso a una ventana como la siguiente, donde ya podras empezar a trabajar en el Nvidia AI Workbench remoto.
+
+  <img src="./Images/nw9.png"> 
+
 # Ollama:
+
+
 
 # Frontend:
 
