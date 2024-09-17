@@ -8,8 +8,8 @@ Txt2App: Convierte cualquier idea en una app móvil perfectamente funcional, imp
 
 Hi!, if you are a judge and want to review the code and Nvidia Ai Workbench Container here the links:
 
-- Nvidia Ai Workbench Container:
-- Video:
+- **Nvidia Ai Workbench Container**: [OPEN VIDEO](pending...)
+- **Video Demo**: [OPEN VIDEO](pending...)
 
 # Introduction:
 
