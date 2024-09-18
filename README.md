@@ -248,7 +248,7 @@ Finalmente ya teniendo todos los elementos de backend y de frontend configurados
 
 Las configuraciones que se realizaron para la custom app fueron las siguientes:
 
-<img src="./Images/settings.png" height="500px">
+<img src="./Images/settings.png" height="400px">
 
 Lo mas importante aqui es que utilizamos el puerto 8080 y de host 0.0.0.0 lo que seria el localhost.
 
