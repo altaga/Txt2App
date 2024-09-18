@@ -35,7 +35,7 @@ Developing mobile applications presents several challenges: [4](#references)
 
 - **UI/UX Design**: Designing a good UI/UX that meets the expectations of users, who are already accustomed to established and current design patterns, can be an even more challenging task than developing the app's own backend.
 
-<hr>
+<br>
 
 <img src="./Images/gifo.gif" width="100%">
 
@@ -85,7 +85,7 @@ Selecting the type of virtual machine for the project was a simple task, especia
 
 <img src="./Images/vm.png">
 
-<hr>
+<br>
 
 VM Selection Summary:
 
@@ -458,6 +458,8 @@ By integrating Nvidia's AI Workbench, Txt2App harnesses cutting-edge machine lea
 ### A New Era for App Development
 
 Txt2App marks a significant shift in how applications are conceptualized, created, and delivered. It democratizes app development, making it accessible to non-technical users without compromising on the quality or complexity of the applications produced. As the world becomes increasingly mobile-centric, Txt2App opens doors for individuals and businesses to innovate and adapt swiftly, fostering a more inclusive and dynamic app ecosystem.
+
+<br>
 
 <img src="./Images/dewey.png" width="100%">
 
