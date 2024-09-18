@@ -1,0 +1,1 @@
+cd /project/code/app-render && npm run build
