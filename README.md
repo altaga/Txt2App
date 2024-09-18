@@ -6,7 +6,7 @@ Txt2App: Turn any idea into a fully functional mobile app, powered by LLM and Nv
 
 # Fastlinks:
 
-Hi!, if you are a judge and want to review the code and Nvidia Ai Workbench Container here the links:
+Hi!, if you are a judge and want to review the code and the Nvidia Ai Workbench Container here are the links:
 
 - **Nvidia Ai Workbench Container**: [OPEN VIDEO](pending...)
 - **Video Demo**: [OPEN VIDEO](pending...)
