@@ -178,15 +178,173 @@ Ahora tenemos que configurar las credenciales de accesso a la platafoma en Nvidi
 
   <img src="./Images/nw9.png"> 
 
+Ahora vamos a proceder a explicar el funcionamiento de cada unos de los elementos del proyecto y como todos juntos realizan la funcion de Txt2App.
+
 # Ollama:
 
+Este proyecto requiere el uso de modelos LLM para poder realizar la generacion del codigo de la App sin necesidad de utilizar codigo, asi que tendremos que instalar el servicio Ollama, este nos dara acceso a utilizar mediante API los modelos de lenguaje que querramos y Ollama Python el cual nos dara acceso a esta API mas facilmente en un programa de python.
 
+<img src="./Images/ollamas.png"> 
+
+- Ollama Service: https://ollama.com/
+- Ollama Python: https://github.com/ollama/ollama-python
+
+Nosotros utilizamos el siguiente modelo LLM para realizar la creacion de codigo ya que es la que nos daba los mejores resultados pero te invitamos a probar varios modelos para realizar tus pruebas.
+
+- Deepseek Coder V2: https://ollama.com/library/deepseek-coder-v2
+
+Si quieres realizar pruebas unicamente de este modelo y funcionamiento te dejamos un Notebook de Jupiter que puedes correr en el Nvidia AI Workbench para realizar pruebas propias.
+
+- [TEST NOTEBOOK](./Notebook/Text%20to%20App.ipynb)
 
 # Frontend:
 
+Esta seccion de frontend esta dividida en dos secciones, ya que tenemos dos elementos del proyecto importantes aqui, el cual es la Main UI y el pre visualizador. En ambos casos se utilizo el framework de ReactJS, aunque con algunas modificaciones para poder montarlo en nuestro servidor de FastAPI (esto se detallara mas adelante).
+
+## Preview App:
+
+La previsualizacion de la app se realizo con una liberia de ReactJS llamada `react-native-web` esta convierte codigo nativo de React Native en una version visualizable en nuestro browser.
+
+<img src="./Images/screen.png" height="400px"> 
+
+Este codigo esta disponible en la siguiente ruta:
+
+- [CODE](./Code/app-render/src/)
+
+## Main UI:
+
+La UI principal de nuestra aplicacion nos provee una forma sencilla de acceder escribir el prompt de la app que se desea, previsualizarla y probarla y finalmente generar un APK instalable.
+
+<img src="./Images/screen2.png"> 
+
+Este codigo esta disponible en la siguiente ruta:
+
+- [CODE](./Code/frontend/src/)
+
 # Build App Backend:
 
+El proceso de build de la app se realiza mediante el framework de React Native version 0.73 junto con las command-line tools de Android. Este proyecto nos permite construir un app funcional de android al llamar el comando npm deploy como esta especificado en el `package.json` que provee el proyecto.
+
+    ...
+    "scripts": {
+      "android": "react-native run-android",
+      "ios": "react-native run-ios",
+      "lint": "eslint .",
+      "start": "react-native start",
+      "test": "jest",
+      "deploy": "cd android && ./gradlew :app:assembleRelease"
+    }
+    ...
+
+Este codigo esta disponible en la siguiente ruta:
+- [Package JSON](./Code/txt2app/package.json)
+- [CODE](./Code/txt2app/)
+
 # Fastapi:
+
+Finalmente ya teniendo todos los elementos de backend y de frontend configurados ya podemos ir de lleno a nuestra API con [FastAPI](https://fastapi.tiangolo.com/), esta se configuro en nuestro Nvidia AI Workbench para funcionar como una Custom App.
+
+<img src="./Images/customApp.png"> 
+
+Las configuraciones que se realizaron para la custom app fueron las siguientes:
+
+<img src="./Images/settings.png" height="500px">
+
+Lo mas importante aqui es que utilizamos el puerto 8080 y de host 0.0.0.0 lo que seria el localhost.
+
+## Uvicorn Server:
+
+Debido a la forma en la que funciona el Nvidia AI Workbench tuvimos que utilizar un modulo llamado Uvicorn, que nos permite seleccionar el host y el puerto por el cual vamos a desplegar nuestra API. Es muy importante que tanto el Host como el Port esten configurados identicos a la custom app.
+
+    # Modules
+    import uvicorn
+    # My App
+    from main import app
+
+    if __name__ == '__main__':
+        uvicorn.run(app=app, port=8080, host="0.0.0.0")
+
+Este codigo esta disponible en la siguiente ruta:
+- [CODE](./Code/app.py)
+
+## Ollama Server:
+
+Nuestra API debe de poder revisar si Ollama Server esta encedido para poder utilizarlo dentro de la misma, asi que realizamos una seccion de codigo que revisa esto y si no esta encendido lo ejecuta en background.
+
+    def check_server():
+        try:
+            check_output(["bash","command.sh"]) # ps -ef | grep ollama | grep serve -> This is the command in the .sh file. I've combined it into a single line for easier execution.
+        except:
+            DUMP = Popen(["ollama", "serve"])
+
+Si el servidor esta encedido correctamente podremos llamar al modelo LLM directamente desde la API con la siguiente ruta.
+
+    @app.post("/api/ollama/generate")
+    async def generate(item: Item):
+        global app_code
+        check_server()
+        result = ollama.generate(model='deepseek-coder-v2:16b', prompt=preprocess(item.prompt), options={"temperature": 0.8})
+        webpage = postprocess(result)
+        file = open("app-render/src/smartphone.js", 'w')
+        file.write(webpage)
+        file.close()
+        app_code = webpage
+        build = Popen(["bash", "build.sh"])
+        build.wait()
+        data = ""
+        with open("app-render/build/index.html") as f:
+            data = f.read().replace('="/', '="')
+        file = open("app-render/build/index.html", 'w')
+        file.write(data)
+        file.close()
+        return {"result": webpage}
+
+Este codigo esta disponible en la siguiente ruta:
+- [command.sh](./Code/command.sh)
+- [build.sh](./Code/build.sh)
+- [CODE](./Code/app.py)
+
+## Static Website:
+
+Para mostrar correctanente la UI es necesario que el server sea capaz de entregar un sitio web estatico, asi que la configuracion de esto se realizo para ambas aplicaciones del [Frontend](#frontend).
+
+    ...
+    def check_render():
+    # Check Webpage Render 
+    data = ""
+    with open("app-render/build/index.html") as f:
+        data = f.read().replace('="/', '="')
+    file = open("app-render/build/index.html", 'w')
+    file.write(data)
+    file.close()
+    
+    # Check Webpage Main UI
+    data = ""
+    with open("frontend/build/index.html") as f:
+        data = f.read().replace('="/', '="')
+    file = open("frontend/build/index.html", 'w')
+    file.write(data)
+    file.close()
+    ...
+    templates1 = Jinja2Templates(directory="app-render/build")
+    templates2 = Jinja2Templates(directory="frontend/build")
+    app.mount("/render/static", StaticFiles(directory="app-render/build/static"), name="static1")
+    app.mount("/render/assets", StaticFiles(directory="app-render/build/assets"), name="static2")
+    app.mount("/static", StaticFiles(directory="frontend/build/static"), name="static3")
+    app.mount("/assets", StaticFiles(directory="frontend/build/assets"), name="static4")
+    ...
+    @app.get('/render/')
+    def index(request: Request):
+        check_render()
+        return templates1.TemplateResponse("index.html", {"request": request})
+
+    @app.get('/')
+    def index(request: Request):
+        check_render()
+        return templates2.TemplateResponse("index.html", {"request": request})
+
+Este codigo esta disponible en la siguiente ruta:
+- [CODE](./Code/main.py)
 
 # Txt2App:
 

@@ -1,0 +1,1 @@
+cd /project/code/txt2app && npm run deploy
