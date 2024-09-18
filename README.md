@@ -459,6 +459,8 @@ By integrating Nvidia's AI Workbench, Txt2App harnesses cutting-edge machine lea
 
 Txt2App marks a significant shift in how applications are conceptualized, created, and delivered. It democratizes app development, making it accessible to non-technical users without compromising on the quality or complexity of the applications produced. As the world becomes increasingly mobile-centric, Txt2App opens doors for individuals and businesses to innovate and adapt swiftly, fostering a more inclusive and dynamic app ecosystem.
 
+<img src="./Images/dewey.png" width="100%">
+
 # References:
 
 1. https://www.forbes.com/sites/timbajarin/2024/03/20/nvidias-ceo-on-the-democratization-of-coding/
