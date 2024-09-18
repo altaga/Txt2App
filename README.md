@@ -1,4 +1,4 @@
-# Txt2App
+# Txt2App: Transforming Ideas into Mobile apps
 
 <img src="./Images/Txt2App.png" width="360px">
 
@@ -448,5 +448,15 @@ Por ultimo ya que la aplicacion es totalmente funcional, podras instalarla media
 Pueden ver que la app es totalmente funcional de la misma forma que funciona en nuestro simulador web, los invitamos a crear sus propias aplicaciones.
 
 # Commentary:
+
+Txt2App is a groundbreaking solution designed to revolutionize the way mobile applications are developed. Leveraging the power of large language models (LLM) and Nvidia's AI Workbench, Txt2App enables users to turn any idea into a fully functional mobile app with ease. This innovative tool lowers the barriers to app development by automating many of the complex, technical tasks that traditionally require extensive programming knowledge. Whether you're an entrepreneur with a vision or a business looking for custom solutions, Txt2App simplifies the journey from concept to deployment.
+
+### Empowering Users with Cutting-Edge AI
+
+By integrating Nvidia's AI Workbench, Txt2App harnesses cutting-edge machine learning models to interpret natural language inputs and generate corresponding app features. This means users can describe their ideas in plain text, and Txt2App will handle the heavy lifting of coding, UI/UX design, and backend infrastructure. This fusion of LLM and AI-driven technology drastically reduces development time, while ensuring that the final product meets high performance and functionality standards.
+
+### A New Era for App Development
+
+Txt2App marks a significant shift in how applications are conceptualized, created, and delivered. It democratizes app development, making it accessible to non-technical users without compromising on the quality or complexity of the applications produced. As the world becomes increasingly mobile-centric, Txt2App opens doors for individuals and businesses to innovate and adapt swiftly, fostering a more inclusive and dynamic app ecosystem.
 
 # References:
