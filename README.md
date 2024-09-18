@@ -2,7 +2,7 @@
 
 <img src="./Images/Txt2App.png" width="360px">
 
-Txt2App: Convierte cualquier idea en una app móvil perfectamente funcional, impulsada por LLM y Nvidia AI Workbench.
+Txt2App: Turn any idea into a fully functional mobile app, powered by LLM and Nvidia AI Workbench.
 
 # Fastlinks:
 
@@ -13,27 +13,27 @@ Hi!, if you are a judge and want to review the code and Nvidia Ai Workbench Cont
 
 # Introduction:
 
-En un mundo cada vez más impulsado por la tecnología, la capacidad de desarrollar aplicaciones móviles no debería estar reservada solo para programadores expertos. Jensen Huang, CEO de Nvidia, ha destacado la necesidad de enfocarnos en aprender ingeniería de prompt en lugar de la programación tradicional, señalando: "It is our job to create computing technology such that nobody has to program. And that the programming language is human." [1](#references)
+In an increasingly technology-driven world, the ability to develop mobile apps shouldn't be reserved for expert programmers only. Nvidia CEO Jensen Huang has highlighted the need to focus on learning prompt engineering rather than traditional programming, noting: "It is our job to create computing technology such that nobody has to program. And that the programming language is human." [1](#references)
 
 <img src="./Images/huang.png" width="100%">
 
-Los **LLMs** proporcionan la capacidad para procesar entradas de lenguaje natural y generación de texto (no limitandose a lenguaje natural), lo cual es una herramieta indispensable para lograr este objetivo. [2](#references)
+**LLMs** provide the ability to process natural language input and text generation (not limited to natural language), which is an indispensable tool to achieve this goal. [2](#references)
 
 <img src="./Images/llms.png" width="100%">
 
-**Nvidia AI Workbench** ofrece un entorno robusto para la creación, entrenamiento y optimización de modelos de inteligencia artificial basado en contenedores, sobre todo permite utilizar recursos tanto en la máquina local como en servidores externos, facilitando el desarrollo rapido desde entornos listos para trabajar, esto acelerando los tiempos de desarrollo. [3](#references)
+The **Nvidia AI Workbench** offers a robust environment for the creation, training and optimization of container-based artificial intelligence models. Above all, it allows the use of resources both on the local machine and on external servers, facilitating rapid development from ready-to-work environments, thus accelerating development times. [3](#references)
 
 <img src="./Images/nvidiaaiwork.png" width="100%">
 
 # Problem:
 
-Desarrollar aplicaciones móviles presenta diversos desafíos: [4](#references)
+Developing mobile applications presents several challenges: [4](#references)
 
-- **Complejidad del Código**: La programación de aplicaciones móviles involucra la escritura y depuración de código, lo que puede ser difícil sin una sólida experiencia técnica.
+- **Code Complexity**: Mobile app programming involves writing and debugging code, which can be difficult without strong technical expertise.
 
-- **Diversidad de frameworks, versiones y plataformas**: Asegurar que una aplicación funcione de manera óptima en diferentes dispositivos requiere gestionar múltiples versiones y configuraciones, lo cual puede complicar el proceso de desarrollo.
+- **Diversity of frameworks, versions, and platforms**: Ensuring that an application works optimally on different devices requires managing multiple versions and configurations, which can complicate the development process.
 
-- **Diseño de UI/UX**: Diseñar una buena UI/UX que cumpla con las expectativas de los usuarios, quienes ya están acostumbrados a patrones de diseño establecidos y actuales, puede ser una tarea aún más desafiante que desarrollar el propio backend de la aplicación.
+- **UI/UX Design**: Designing a good UI/UX that meets the expectations of users, who are already accustomed to established and current design patterns, can be an even more challenging task than developing the app's own backend.
 
 <hr>
 
@@ -41,47 +41,47 @@ Desarrollar aplicaciones móviles presenta diversos desafíos: [4](#references)
 
 # Current Solutions:
 
-- Flutter Flow: Esta solucion que provee herramientas para el diseño de interfaces, pero no provee ninguna capacidad de AI. https://www.flutterflow.io/product
+- Flutter Flow: This solution provides tools for interface design, but does not provide any AI capabilities. https://www.flutterflow.io/product
 
-- Appypie: Esta solucion text to app, permite realizar aplicaciones solo con un prompt de texto, sin embargo esta requiere de una suscripcion, es de codigo cerrado y el demo proporcionado por la pagina no provee evidencia del uso de AI. https://www.appypie.com/
+- Appypie: This text to app solution allows you to create applications with just a text prompt, however it requires a subscription, is closed source, and the demo provided by the page does not provide evidence of the use of AI. https://www.appypie.com/
 
-- UI Bakery: Aunque esta pagina muestra de una mejor forma el diseño de interfaces mediante AI, no provee ninguna funcionalidad a la app, solo generando diseños base. https://uibakery.io/
+- UI Bakery: Although this page better demonstrates AI-based interface design, it does not provide any functionality to the app, only generating base designs. https://uibakery.io/
 
 # Solution: 
 
-Presentamos **Txt2App**, la promesa de Huang se convierte en una realidad, accesible para todos, democratizando el desarrollo de aplicaciones y abriendo nuevas posibilidades para la creación de tecnología gracias a Nvidia Ai Workbench y los LLMs (Generative AI).
+Introducing **Txt2App**, Huang's promise becomes a reality, accessible to everyone, democratizing application development and opening up new possibilities for technology creation thanks to Nvidia Ai Workbench and LLMs (Generative AI).
 
 <img src="./Images/Txt2App.png" width="300px">
 
 # Diagram and Summary:
 
-El diagrama general de nuestra solucion es el siguiente, este es un summary de los servicios, pero los detallaremos mas adelante.
+The general diagram of our solution is as follows, this is a summary of the services, but we will detail them later.
 
 <img src="./Images/full diagram.drawio.png">
 
-- Google Cloud VM: Estamos utilizando una VM de google con las siguientes caracteristicas.
+- Google Cloud VM: We are using a Google VM with the following features.
   - OS: Ubuntu 24.04 LTS.
   - GPU: Nvidia Tesla T4 (16Gb).
   - RAM: 65 Gb.
   - HDD: 500 Gb.
   - vCPU: 10 cores.
-- Nvidia AI Workbench: Se utiliza el toolkit de Nvidia para realizar el desarrollo y despleuigue rapido de nuestra aplicacion.
+- Nvidia AI Workbench: The Nvidia toolkit is used to perform rapid development and deployment of our application.
   - https://docs.nvidia.com/ai-workbench/user-guide/latest/overview/introduction.html
-- Ollama Server: Utilizamos el servicio de Ollama server para utilizar los modelos LLM utilizados en el proyecto.
+- Ollama Server: We use the Ollama server service to run the LLM models used in the project.
   - LLM Model: Deepseek Coder V2.
     - https://ollama.com/library/deepseek-coder-v2
-- ReactJS: Este fue el framework web para realizar las UI del proyecto, utilizamos ReactJS puro sin framework adicional.
-  - Main UI: Esta es la interfaz principal del proyecto donde se visualiza la ventana de texto y la previsualizacion de la App.
-  - App Preview: Esta interfaz pre-renderiza la app para que la pruebe el usuario antes de convertirla en APK.
+- ReactJS: This was the web framework to create the project's UI, we used pure ReactJS without any additional framework.
+  - Main UI: This is the main interface of the project where the text window and the App preview are displayed.
+  - App Preview: This interface pre-renders the app for the user to test before converting it to APK.
 - React Native:
-  - App Builder: Se utiliza el build nativo de Android para convertir el codigo de React en un codigo nativo de Android.
-- Fastapi: Utilizamos este framework para realizar la API completa de nuestra aplicacion.
-  - Static Website: Esta seccion de la API se usa como server para visualizar la UI desde el browser.
-  - API: Esta seccion comunica la UI con los servicios de generacion, previsualizacion y build.
+  - App Builder: Android Native Build is used to convert React code into Android native code.
+- Fastapi: We use this framework to create the complete API of our application.
+  - Static Website: This section of the API is used as a server to display the UI from the browser.
+  - API: This section communicates the UI with the generation, preview and build services.
 
 # Google VM:
 
-Seleccionar el tipo de máquina virtual para el proyecto fue una tarea sencilla, especialmente al considerar que Google ofrece una gran variedad de GPU Nvidia. Después de realizar algunas pruebas en el calculador, se decidió utilizar una VM con las siguientes características.
+Selecting the type of virtual machine for the project was a simple task, especially considering that Google offers a wide variety of Nvidia GPUs. After performing some tests on the computer, it was decided to use a VM with the following characteristics.
 
 <img src="./Images/vm.png">
 
@@ -97,133 +97,133 @@ VM Selection Summary:
 | HDD    | 500 Gb                 |
 | vCPU   | 10 cores               |
 
-Se utilizo una maquina bastante potente en cuestion de RAM y vCPU ya que teniamos que experimentar la mejor seleccion de modelo LLM y no tener problemas con limitaciones de recursos, esto claro contemplando que no ibamos a utilizar modelos como llama3 405b, los cuales ocupan recuros de HW muy elevados en costos.
+A fairly powerful machine was used in terms of RAM and vCPU since we had to experiment with the best selection of LLM models and not have problems with resource limitations, this of course considering that we were not going to use models like the llama3 405b, which occupy very expensive HW resources.
 
 ## SSH Setup:
 
-Algo importante que hay que configurar para que no tengamos ningun problema en la siguiente seccion, es la configuracion de acceso SSH que que requerimos para configurar la VM y el acceso mediante el Nvidia AI Workbench.
+Something important that must be configured so that we do not have any problems in the next section is the SSH access configuration that we require to configure the VM and access through the Nvidia AI Workbench.
 
-- En nuestra pc local tendremos que crear una RSA Keypair, esto pude realizarse de muchas formas, sin embargo nosotros usaremos el comando `ssh-keygen` de la libreria OpenSSH.
+- On our local PC we will have to create an RSA Keypair, this can be done in many ways, however we will use the `ssh-keygen` command from the OpenSSH library.
 
   <img src="./Images/ssh0.png">
 
-- La private key estara ya en nuestra carpeta .shh pero ocuparemos los datos del archivo id_rsa.pub, la que es la clave publica.
-
+- The private key will already be in our .shh folder but we will use the data from the id_rsa.pub file, which is the public key.
+  
   <img src="./Images/ssh0_1.png">
 
-- Iremos a la seccion inferior de la configuracion de VM:
+- We will go to the bottom section of the VM configuration:
 
   <img src="./Images/ssh1.png">
 
-- Seleccionamos Advanced Options - Security - Manage Access - Add manually generated SSH keys, ahi colocaremos la public key del archivo id_rsa.pub.
+- We select Advanced Options - Security - Manage Access - Add manually generated SSH keys, there we will place the public key from the id_rsa.pub file.
 
   <img src="./Images/ssh2.png">
 
-- Una vez echo esto ya tendremos todo listo para utilizar la VM sin ningun inconveniente mediante SSH, la ip address de la VM estara disponible despues de unos segundos.
+- Once this is done, we will be ready to use the VM without any problems via SSH, the VM's IP address will be available after a few seconds.
 
   <img src="./Images/ssh3.png">
 
 # Nvidia AI Workbench:
 
-Ya con la VM configurada tendremos que conectarnos a ella mediante SSH para poder configurarla, esto puedes realizarlo con cualquier programa para ese fin, incluso GC te provee una interfaz web para realizar este proceso sin problema.
+Once the VM is configured, we will have to connect to it via SSH to configure it. You can do this with any program for that purpose, even GC provides you with a web interface to perform this process without any problem.
 
 ## Ubuntu Remote Install: 
-- Abre una terminal SSH en el programa que prefieras (por ejemplo la web ui de GC).
+- Open an SSH terminal in your preferred program (e.g. the GC web ui).
   <img src="./Images/nw0.png">
 
-- Una vez dentro de la VM pondremos el siguiente comando sin mas.
+- Once inside the VM we will put the following command without further ado.
 
       mkdir -p $HOME/.nvwb/bin && \
       curl -L https://workbench.download.nvidia.com/stable/workbench-cli/$(curl -L -s https://workbench.download.nvidia.com/stable/workbench-cli/LATEST)/nvwb-cli-$(uname)-$(uname -m) --output $HOME/.nvwb/bin/nvwb-cli && \
       chmod +x $HOME/.nvwb/bin/nvwb-cli && \
       sudo -E $HOME/.nvwb/bin/nvwb-cli install
 
-- Este comando instalara todas las dependencias del Nvidia AI Workbench, pero iremos paso a paso, tendras que aceptar los terminos de uso del programa.
+- This command will install all the dependencies of Nvidia AI Workbench, but we will go step by step, you will have to accept the terms of use of the program.
 
   <img src="./Images/nw1.png">
 
-- Para este proyecto se utilizo Docker, pero tu puedes experimentar con Podman si lo deseas.
+- Docker was used for this project, but you can experiment with Podman if you want.
 
   <img src="./Images/nw2.png">
 
-- Recomendamos aqui que se haga la instalacion de los drivers como lo indica Nvidia AI Workbench, en nuestra maquina virtual funciono sin ningun problema.
+- We recommend here that you install the drivers as indicated by Nvidia AI Workbench, in our virtual machine it worked without any problem.
   
   <img src="./Images/nw3.png">
 
-- Empezara el proceso de instalacion, segun tu VM puede tardar menos de 2 min o mas de 5 min como indica Nvidia AI Workbench, sin embargo al usar una VW de Google no habra ningun problema por la velocidad de internet.
+- The installation process will begin, depending on your VM it may take less than 2 min or more than 5 min as indicated by Nvidia AI Workbench, however when using a Google VW there will be no problem due to internet speed.
 
   <img src="./Images/nw4.png">
 
-- Una vez terminado todo el proceso se reiniciara la VM, esto cerrara nuestra sesion de SSH, sin embargo ya no sera necesaria, ya podremos acceder desde nuestra Nvidia AI Workbench Local.
+- Once the entire process is finished, the VM will restart, this will close our SSH session, however it will no longer be necessary, we will now be able to access it from our Local Nvidia AI Workbench.
 
   <img src="./Images/nw5.png">
 
 ## Local Access: 
 
-Ahora tenemos que configurar las credenciales de accesso a la platafoma en Nvidia AI Workbench local.
+Now we need to configure the platform access credentials in the local Nvidia AI Workbench.
 
-- Configura todas las credenciales de acceso como IP de la VM, private key, etc.
+- Configure all access credentials such as VM IP, private key, etc.
 
   <img src="./Images/nw6.png">
 
-- Si todo funciono correctamente ya tendremos accesso a nuestro server remoto de Nvidia AI Workbench en la VM de google, en el caso de nuestro proyecto seleccionamos New Project.
+- If everything worked correctly, we will have access to our remote Nvidia AI Workbench server in the Google VM. In the case of our project, we select New Project.
 
-  <img src="./Images/nw7.png"> 
+  <img src="./Images/nw7.png">
 
-- Segun las caraterosticas de tu proyecto personal elige el enviroment ideal para ti, en nuestro caso seleccionamos **Python with CUDA 12.2**.
+- Depending on the characteristics of your personal project, choose the ideal environment for you. In our case, we selected **Python with CUDA 12.2**.
 
-  <img src="./Images/nw8.png"> 
+  <img src="./Images/nw8.png">
 
-- Si todo salio bien hasta ahora tendras acceso a una ventana como la siguiente, donde ya podras empezar a trabajar en el Nvidia AI Workbench remoto.
+- If everything went well so far, you will have access to a window like the following one, where you can start working on the remote Nvidia AI Workbench.
 
-  <img src="./Images/nw9.png"> 
+  <img src="./Images/nw9.png">
 
-Ahora vamos a proceder a explicar el funcionamiento de cada unos de los elementos del proyecto y como todos juntos realizan la funcion de Txt2App.
+Now we will proceed to explain the operation of each of the elements of the project and how all together they perform the function of Txt2App.
 
 # Ollama:
 
-Este proyecto requiere el uso de modelos LLM para poder realizar la generacion del codigo de la App sin necesidad de utilizar codigo, asi que tendremos que instalar el servicio Ollama, este nos dara acceso a utilizar mediante API los modelos de lenguaje que querramos y Ollama Python el cual nos dara acceso a esta API mas facilmente en un programa de python.
+This project requires the use of LLM models to be able to generate the App code without having to use code, so we will have to install the Ollama service, this will give us access to use the language models we want through API and Ollama Python which will give us access to this API more easily in a Python program.
 
 <img src="./Images/ollamas.png"> 
 
 - Ollama Service: https://ollama.com/
 - Ollama Python: https://github.com/ollama/ollama-python
 
-Nosotros utilizamos el siguiente modelo LLM para realizar la creacion de codigo ya que es la que nos daba los mejores resultados pero te invitamos a probar varios modelos para realizar tus pruebas.
+We used the following LLM model to create code since it gave us the best results, but we invite you to try several models to carry out your tests.
 
 - Deepseek Coder V2: https://ollama.com/library/deepseek-coder-v2
 
-Si quieres realizar pruebas unicamente de este modelo y funcionamiento te dejamos un Notebook de Jupiter que puedes correr en el Nvidia AI Workbench para realizar pruebas propias.
+If you want to test only this model and operation, we leave you a Jupiter Notebook that you can run in the Nvidia AI Workbench to perform your own tests.
 
 - [TEST NOTEBOOK](./Notebook/Text%20to%20App.ipynb)
 
 # Frontend:
 
-Esta seccion de frontend esta dividida en dos secciones, ya que tenemos dos elementos del proyecto importantes aqui, el cual es la Main UI y el pre visualizador. En ambos casos se utilizo el framework de ReactJS, aunque con algunas modificaciones para poder montarlo en nuestro servidor de FastAPI (esto se detallara mas adelante).
+This frontend section is divided into two sections, since we have two important project elements here, which are the Main UI and the previewer. In both cases, the ReactJS framework was used, although with some modifications to be able to mount it on our FastAPI server (this will be detailed later).
 
 ## Preview App:
 
-La previsualizacion de la app se realizo con una liberia de ReactJS llamada `react-native-web` esta convierte codigo nativo de React Native en una version visualizable en nuestro browser.
+The app preview was done with a ReactJS library called `react-native-web` which converts native React Native code into a version viewable in our browser.
 
 <img src="./Images/screen.png" height="400px"> 
 
-Este codigo esta disponible en la siguiente ruta:
+This code is available at the following path:
 
 - [CODE](./Code/app-render/src/)
 
 ## Main UI:
 
-La UI principal de nuestra aplicacion nos provee una forma sencilla de acceder escribir el prompt de la app que se desea, previsualizarla y probarla y finalmente generar un APK instalable.
+The main UI of our application provides us with an easy way to access the prompt of the desired app, preview and test it and finally generate an installable APK.
 
 <img src="./Images/screen2.png"> 
 
-Este codigo esta disponible en la siguiente ruta:
+This code is available at the following path:
 
 - [CODE](./Code/frontend/src/)
 
 # Build App Backend:
 
-El proceso de build de la app se realiza mediante el framework de React Native version 0.73 junto con las command-line tools de Android. Este proyecto nos permite construir un app funcional de android al llamar el comando npm deploy como esta especificado en el `package.json` que provee el proyecto.
+The app build process is done using the React Native framework version 0.73 along with the Android command-line tools. This project allows us to build a functional Android app by calling the npm deploy command as specified in the `package.json` provided by the project.
 
     ...
     "scripts": {
@@ -236,25 +236,25 @@ El proceso de build de la app se realiza mediante el framework de React Native v
     }
     ...
 
-Este codigo esta disponible en la siguiente ruta:
+This code is available at the following path:
 - [Package JSON](./Code/txt2app/package.json)
 - [CODE](./Code/txt2app/)
 
 # Fastapi:
 
-Finalmente ya teniendo todos los elementos de backend y de frontend configurados ya podemos ir de lleno a nuestra API con [FastAPI](https://fastapi.tiangolo.com/), esta se configuro en nuestro Nvidia AI Workbench para funcionar como una Custom App.
+Finally, having all the backend and frontend elements configured, we can go straight to our API with [FastAPI](https://fastapi.tiangolo.com/), this was configured in our Nvidia AI Workbench to function as a Custom App.
 
 <img src="./Images/customApp.png"> 
 
-Las configuraciones que se realizaron para la custom app fueron las siguientes:
+The configurations that were made for the custom app were the following:
 
 <img src="./Images/settings.png" height="400px">
 
-Lo mas importante aqui es que utilizamos el puerto 8080 y de host 0.0.0.0 lo que seria el localhost.
+The most important thing here is that we use port 8080 and host 0.0.0.0 which would be the localhost.
 
 ## Uvicorn Server:
 
-Debido a la forma en la que funciona el Nvidia AI Workbench tuvimos que utilizar un modulo llamado Uvicorn, que nos permite seleccionar el host y el puerto por el cual vamos a desplegar nuestra API. Es muy importante que tanto el Host como el Port esten configurados identicos a la custom app.
+Due to the way Nvidia AI Workbench works we had to use a module called Uvicorn, which allows us to select the host and port through which we are going to deploy our API. It is very important that both the Host and the Port are configured identically to the custom app.
 
     # Modules
     import uvicorn
@@ -264,12 +264,12 @@ Debido a la forma en la que funciona el Nvidia AI Workbench tuvimos que utilizar
     if __name__ == '__main__':
         uvicorn.run(app=app, port=8080, host="0.0.0.0")
 
-Este codigo esta disponible en la siguiente ruta:
+This code is available at the following path:
 - [CODE](./Code/app.py)
 
 ## Ollama Server:
 
-Nuestra API debe de poder revisar si Ollama Server esta encedido para poder utilizarlo dentro de la misma, asi que realizamos una seccion de codigo que revisa esto y si no esta encendido lo ejecuta en background.
+Our API must be able to check if Ollama Server is on in order to use it within it, so we created a section of code that checks this and if it is not on, it runs it in the background.
 
     def check_server():
         try:
@@ -277,7 +277,7 @@ Nuestra API debe de poder revisar si Ollama Server esta encedido para poder util
         except:
             DUMP = Popen(["ollama", "serve"])
 
-Si el servidor esta encedido correctamente podremos llamar al modelo LLM directamente desde la API con la siguiente ruta.
+If the server is up and running correctly we can call the LLM model directly from the API with the following route.
 
     @app.post("/api/ollama/generate")
     async def generate(item: Item):
@@ -299,14 +299,14 @@ Si el servidor esta encedido correctamente podremos llamar al modelo LLM directa
         file.close()
         return {"result": webpage}
 
-Este codigo esta disponible en la siguiente ruta:
+This code is available at the following path:
 - [command.sh](./Code/command.sh)
 - [build.sh](./Code/build.sh)
 - [CODE](./Code/app.py)
 
 ## Static Website:
 
-Para mostrar correctanente la UI es necesario que el server sea capaz de entregar un sitio web estatico, asi que la configuracion de esto se realizo para ambas aplicaciones del [Frontend](#frontend).
+In order to correctly display the UI, the server needs to be able to deliver a static website, so this was configured for both [Frontend](#frontend) applications.
 
     ...
     def check_render():
@@ -343,12 +343,12 @@ Para mostrar correctanente la UI es necesario que el server sea capaz de entrega
         check_render()
         return templates2.TemplateResponse("index.html", {"request": request})
 
-Este codigo esta disponible en la siguiente ruta:
+This code is available at the following path:
 - [CODE](./Code/main.py)
 
 ## Build Android APK:
 
-Finalmente la ultima seccion del APK que tenemos que explorar es la ejecucion del build de la app final. Esto se genera mediante el proyecto de React Native al realizar la siguiente API call.
+Finally, the last section of the APK we need to explore is the execution of the final app build. This is generated by the React Native project by making the following API call.
 
     @app.get("/api/buildapk")
     async def build_apk():
@@ -363,19 +363,19 @@ Finalmente la ultima seccion del APK que tenemos que explorar es la ejecucion de
     async def download_apk():
         return FileResponse("txt2app/android/app/build/outputs/apk/release/app-release.apk", filename="txt2app.apk")
 
-Este codigo esta disponible en la siguiente ruta:
+This code is available at the following path:
 - [buildApp.sh](./Code/buildApp.sh)
 - [CODE](./Code/main.py)
 
 # Txt2App:
 
-Ya terminado de explicar todo el stack tecnologico que tenemos en nuestra aplicacion es la hora de mostrar como se utiliza nuestra webapp.
+Now that we have finished explaining the entire technological stack that we have in our application, it is time to show how our webapp is used.
 
 <img src="./Images/lets.gif" width="100%">
 
 ## Prompt:
 
-Lo primero que es importante de aclarar es que nuestra AI es una LLM, por lo tanto la realizacion de una buena descripcion de tu aplicacion afectara directamente a la calidad de la misma, por lo tanto recomendamos que seas lo mas especifico posible cuando realices una app.
+The first thing that is important to clarify is that our AI is an LLM, therefore making a good description of your application will directly affect its quality, therefore we recommend that you be as specific as possible when creating an app.
 
 Example Prompt
 ```
@@ -421,31 +421,31 @@ Time Text: The time text is displayed in a large, bold font (dark gray, #333333)
 Time Background: The background of the Time Section remains light gray (#F7F7F7).
 ```
 
-Una vez puesta la descripcion deberas presionar el boton de Create App.
+Once you have entered the description, you must press the Create App button.
 
 <img src="./Images/uiButton.png" width="100%">
 
-Deberas esperar unos segundos a que la LLM genere tu app, en este proceso aparecera una ventana espera en el celular. Ten paciencia segun tu sistema podria tardar entre 10 - 30 segundos.
+You will have to wait a few seconds for the LLM to generate your app. During this process, a waiting window will appear on your cell phone. Be patient, depending on your system, it could take between 10 - 30 seconds.
 
 ## Preview and Test:
 
-Podemos observar que la aplicacion que generamos es completamente funcional y cumple con los requerimietos que solicitamos, recuerda que mientras mas especifico seas, la aplicacion tendra un mejor funcionamiento. 
+We can see that the application we generated is fully functional and meets the requirements we requested. Remember that the more specific you are, the better the application will perform.
 
 <img src="./Images/exampleGif.gif" width="100%">
 
 ## Build and Download:
 
-Finalmente si el resultado es adecuado para nosotros pasaremos a presionar el boton de Download APK, este generara nuestra APK la cual podras instalar en cualquier dispositivo Android o incluso subirla a la Playstore. La primera vez que generes una APK puede llegar a tardar unos minutos debito al setup de algunas dependencias que exige React Native, los siguientes builds se haran en menos de 1 min.
+Then, if the result is suitable for us, we will press the Download APK button, this will generate our APK which you can install on any Android device or even upload it to the Playstore. The first time you generate an APK it may take a few minutes due to the setup of some dependencies required by React Native, the following builds will be done in less than 1 min.
 
 <img src="./Images/downloadAPK.gif" width="100%">
 
 ## Install the App:
 
-Por ultimo ya que la aplicacion es totalmente funcional, podras instalarla mediante el comando `adb install -r txt2app.apk`.
+Finally, since the application is fully functional, you can install it using the command `adb install -r txt2app.apk`.
 
 <img src="./Images/appinstalled.png" height="400px"> <img src="./Images/appinstalledGif.gif" height="400px">
 
-Pueden ver que la app es totalmente funcional de la misma forma que funciona en nuestro simulador web, los invitamos a crear sus propias aplicaciones.
+You can see that the app is fully functional in the same way it works in our web simulator, we invite you to create your own applications.
 
 # Commentary:
 
