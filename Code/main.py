@@ -102,7 +102,7 @@ async def list_ollama():
     return {"result": ollama.list()}
 
 @app.get("/api/buildapk")
-async def download_apk():
+async def build_apk():
     file = open("txt2app/App.js", 'w')
     file.write(app_code)
     file.close()

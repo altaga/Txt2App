@@ -346,7 +346,30 @@ Para mostrar correctanente la UI es necesario que el server sea capaz de entrega
 Este codigo esta disponible en la siguiente ruta:
 - [CODE](./Code/main.py)
 
+## Build Android APK:
+
+Finalmente la ultima seccion del APK que tenemos que explorar es la ejecucion del build de la app final. Esto se genera mediante el proyecto de React Native al realizar la siguiente API call.
+
+    @app.get("/api/buildapk")
+    async def build_apk():
+        file = open("txt2app/App.js", 'w')
+        file.write(app_code)
+        file.close()
+        build = Popen(["bash", "buildApp.sh"])
+        build.wait()
+        return {"result":"ok"}
+
+    @app.get("/api/downloadapk")
+    async def download_apk():
+        return FileResponse("txt2app/android/app/build/outputs/apk/release/app-release.apk", filename="txt2app.apk")
+
+Este codigo esta disponible en la siguiente ruta:
+- [buildApp.sh](./Code/buildApp.sh)
+- [CODE](./Code/main.py)
+
 # Txt2App:
+
+
 
 ## Prompt:
 
