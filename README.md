@@ -10,7 +10,7 @@ Hi!, if you are a judge and want to review the code and the Nvidia Ai Workbench 
 
 - **Nvidia Ai Workbench Container**: [OPEN VIDEO](pending...)
 - **Video Demo**: [OPEN VIDEO](pending...)
-- **Blog Post**: [Click here](pending...)
+- **Blog Post**: [Click here](https://github.com/altaga/Txt2App/blob/main/BlogPost.MD)
 
 # Introduction:
 
