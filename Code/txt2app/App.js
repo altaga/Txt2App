@@ -1,79 +1,116 @@
- 
-import React, { useState, useRef } from 'react';
-import { Alert, View, Text, Button, StyleSheet, SafeAreaView, StatusBar } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {
+  Animated,
+  Button,
+  View,
+  Text,
+  Image,
+  TextInput,
+  ScrollView,
+  FlatList,
+  SectionList,
+  TouchableOpacity,
+  TouchableHighlight,
+  TouchableWithoutFeedback,
+  Pressable,
+  AppState,
+  BackHandler,
+  Dimensions,
+  HapticFeedback,
+  Linking,
+  NativeModules,
+  PermissionsAndroid,
+  Platform,
+  Settings,
+  Share,
+  ToastAndroid,
+  Vibration,
+  Keyboard,
+  PixelRatio,
+  LayoutAnimation,
+  SafeAreaView,
+  StyleSheet,
+  ActivityIndicator,
+  Alert,
+  Modal,
+  RefreshControl,
+  Slider,
+  Switch,
+} from 'react-native';
 
 const App = () => {
-  const [count, setCount] = useState(0);
-  const [time, setTime] = useState('');
-  const timerRef = useRef();
+  const [imageUrl, setImageUrl] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
-  const increment = () => setCount(prevCount => prevCount + 1);
-  const decrement = () => setCount(prevCount => prevCount - 1);
+  useEffect(() => {
+    fetchImage();
+  }, []);
 
-  const updateTime = () => {
-    const date = new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
-    setTime(date);
+  const fetchImage = async () => {
+    try {
+      const response = await fetch(
+        'https://www.nvidia.com/content/dam/en-zz/Solutions/about-nvidia/board-of-directors/jensen-huang.jpg',
+      );
+      setImageUrl(response.url);
+    } catch (err) {
+      Alert.alert('Error', 'Failed to load image');
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
   };
 
+  if (loading) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
+  }
+
+  if (error || !imageUrl) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.errorText}>Failed to load image</Text>
+      </View>
+    );
+  }
+
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="dark-content" backgroundColor="#F7F7F7" />
-      <View style={styles.counterSection}>
-        <Text style={styles.countText}>{count}</Text>
-      </View>
-      <View style={styles.buttonSection}>
-        <Button title="Up" onPress={increment} color="#2F4F7F" />
-        <Button title="Down" onPress={decrement} color="#2F4F7F" />
-        <Button title="Time" onPress={updateTime} color="#2F4F7F" />
-      </View>
-      {time !== '' && (
-        <View style={styles.timeSection}>
-          <Text style={styles.timeText}>{time}</Text>
-        </View>
-      )}
-    </SafeAreaView>
+    <View style={styles.container}>
+      <Image source={{uri: imageUrl}} style={styles.image} />
+      <Text style={styles.title}>Jensen Huang</Text>
+      <Text style={styles.subtitle}>CEO of NVIDIA</Text>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F7F7F7',
-    alignItems: 'center',
     justifyContent: 'center',
-  },
-  counterSection: {
-    width: '80%',
-    height: '40%',
-    backgroundColor: '#ADD8E6',
-    borderRadius: 10,
     alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#ffffff',
   },
-  countText: {
-    fontSize: 32,
-    color: '#2F4F7F',
-    fontWeight: 'bold',
+  image: {
+    width: 300,
+    height: 300,
+    borderRadius: 150, // To make the image circular, adjust as needed for square aspect ratio
   },
-  buttonSection: {
-    width: '80%',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginTop: 20,
-  },
-  timeSection: {
-    width: '80%',
-    height: '15%',
-    backgroundColor: '#F7F7F7',
-    borderRadius: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 20,
-  },
-  timeText: {
+  title: {
     fontSize: 24,
-    color: '#333333',
     fontWeight: 'bold',
+    marginTop: 20,
+    color: '#000000',
+  },
+  subtitle: {
+    fontSize: 18,
+    color: '#008000', // Green color for the title
+  },
+  errorText: {
+    fontSize: 18,
+    color: '#000000',
   },
 });
 

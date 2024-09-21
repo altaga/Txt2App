@@ -1,1 +1,1 @@
-cd /project/code/txt2app && npm run deploy
+cd /project/code/Txt2App && npm run lint && npm run deploy

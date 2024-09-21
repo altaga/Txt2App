@@ -20,7 +20,6 @@ export default class SmartphoneContainer extends Component {
           justifyContent: "center",
           alignItems: "center",
           padding: "0px",
-          backgroundColor: "#27272a",
         }}
       >
         <div

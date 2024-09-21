@@ -12,7 +12,17 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 
 # My Modules
-from utils import preprocess, postprocess
+from utils import preprocess, postprocess, emptyprompt
+
+# API Setup
+app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # My Classes Models:
 class Item(BaseModel):
@@ -25,14 +35,6 @@ def check_server():
         DUMP = Popen(["ollama", "serve"])
 
 def check_render():
-    # Check Webpage Render
-    data = ""
-    with open("app-render/build/index.html") as f:
-        data = f.read().replace('="/', '="')
-    file = open("app-render/build/index.html", 'w')
-    file.write(data)
-    file.close()
-    
     # Check Webpage Main UI
     data = ""
     with open("frontend/build/index.html") as f:
@@ -40,24 +42,38 @@ def check_render():
     file = open("frontend/build/index.html", 'w')
     file.write(data)
     file.close()
+    # Check Webpage Render
+    data = ""
+    with open("app-render/build-fallback/index.html") as f:
+        data = f.read().replace('="/', '="')
+    file = open("app-render/build-fallback/index.html", 'w')
+    file.write(data)
+    file.close()
+    try:
+        # Check Webpage Render
+        data = ""
+        with open("app-render/build/index.html") as f:
+            data = f.read().replace('="/', '="')
+        file = open("app-render/build/index.html", 'w')
+        file.write(data)
+        file.close()
+    except:
+        ...
 
+def delete_route(router):
+    for index, route in enumerate(app.routes):
+        if route.path == router:
+            print("Del")
+            print(router)
+            del app.routes[index]
+            break
 
-# API Setup
-app = FastAPI()
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
+# API STATIC FILES
 templates1 = Jinja2Templates(directory="app-render/build")
 templates2 = Jinja2Templates(directory="frontend/build")
-app.mount("/render/static", StaticFiles(directory="app-render/build/static"), name="static1")
-app.mount("/render/assets", StaticFiles(directory="app-render/build/assets"), name="static2")
-app.mount("/static", StaticFiles(directory="frontend/build/static"), name="static3")
-app.mount("/assets", StaticFiles(directory="frontend/build/assets"), name="static4")
+templates3 = Jinja2Templates(directory="app-render/build-fallback")
+app.mount("/static", StaticFiles(directory="frontend/build/static"), name="static5")
+app.mount("/assets", StaticFiles(directory="frontend/build/assets"), name="static6")
 # Ollama Server Setup
 check_server()
 
@@ -65,6 +81,7 @@ check_server()
 app_code = ""
 with open("app-render/src/smartphone.js") as f:
     app_code = f.read()
+once = False
 
 # POST
 
@@ -72,7 +89,7 @@ with open("app-render/src/smartphone.js") as f:
 async def generate(item: Item):
     global app_code
     check_server()
-    result = ollama.generate(model='deepseek-coder-v2:16b', prompt=preprocess(item.prompt), options={"temperature": 0.8})
+    result = ollama.generate(model='deepseek-coder-v2:16b', prompt=preprocess(item.prompt or emptyprompt()), options={"temperature": 0.8})
     webpage = postprocess(result)
     file = open("app-render/src/smartphone.js", 'w')
     file.write(webpage)
@@ -81,11 +98,7 @@ async def generate(item: Item):
     build = Popen(["bash", "build.sh"])
     build.wait()
     data = ""
-    with open("app-render/build/index.html") as f:
-        data = f.read().replace('="/', '="')
-    file = open("app-render/build/index.html", 'w')
-    file.write(data)
-    file.close()
+    check_render()
     return {"result": webpage}
 
 # GET
@@ -103,7 +116,7 @@ async def list_ollama():
 
 @app.get("/api/buildapk")
 async def build_apk():
-    file = open("txt2app/App.js", 'w')
+    file = open("Txt2App/App.js", 'w')
     file.write(app_code)
     file.close()
     build = Popen(["bash", "buildApp.sh"])
@@ -112,16 +125,28 @@ async def build_apk():
 
 @app.get("/api/downloadapk")
 async def download_apk():
-    return FileResponse("txt2app/android/app/build/outputs/apk/release/app-release.apk", filename="txt2app.apk")
+    return FileResponse("Txt2App/android/app/build/outputs/apk/release/app-release.apk", filename="txt2app.apk")
 
 # Web Page Server
-
-@app.get('/render/')
-def index(request: Request):
-    check_render()
-    return templates1.TemplateResponse("index.html", {"request": request})
 
 @app.get('/')
 def index(request: Request):
     check_render()
     return templates2.TemplateResponse("index.html", {"request": request})
+
+@app.get('/render/')
+def index_render(request: Request):
+    delete_route("/render/static")
+    delete_route("/render/assets")
+    try:
+        check_render()
+        app.mount("/render/static", StaticFiles(directory="app-render/build/static"), name="static1")
+        app.mount("/render/assets", StaticFiles(directory="app-render/build/assets"), name="static2")
+        return templates1.TemplateResponse("index.html", {"request": request})
+    except:
+        check_render()
+        print("Fallback")
+        app.mount("/render/static", StaticFiles(directory="app-render/build-fallback/static"), name="static3")
+        app.mount("/render/assets", StaticFiles(directory="app-render/build-fallback/assets"), name="static4")
+        return templates3.TemplateResponse("index.html", {"request": request})
+

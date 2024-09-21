@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "txt2app.app"
-               BlueprintName = "txt2app"
-               ReferencedContainer = "container:txt2app.xcodeproj">
+               BuildableName = "Txt2App.app"
+               BlueprintName = "Txt2App"
+               ReferencedContainer = "container:Txt2App.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "txt2appTests.xctest"
-               BlueprintName = "txt2appTests"
-               ReferencedContainer = "container:txt2app.xcodeproj">
+               BuildableName = "Txt2AppTests.xctest"
+               BlueprintName = "Txt2AppTests"
+               ReferencedContainer = "container:Txt2App.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "txt2app.app"
-            BlueprintName = "txt2app"
-            ReferencedContainer = "container:txt2app.xcodeproj">
+            BuildableName = "Txt2App.app"
+            BlueprintName = "Txt2App"
+            ReferencedContainer = "container:Txt2App.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "txt2app.app"
-            BlueprintName = "txt2app"
-            ReferencedContainer = "container:txt2app.xcodeproj">
+            BuildableName = "Txt2App.app"
+            BlueprintName = "Txt2App"
+            ReferencedContainer = "container:Txt2App.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

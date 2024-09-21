@@ -1,76 +1,45 @@
  
-import React, { useState } from 'react';
-import { Alert, View, Text, TouchableOpacity, StyleSheet, SafeAreaView, StatusBar } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Animated, Button, View, Text, Image, TextInput, ScrollView, FlatList, SectionList, TouchableOpacity, TouchableHighlight, TouchableWithoutFeedback, Pressable, AppState, BackHandler, Dimensions, HapticFeedback, Linking, NativeModules, PermissionsAndroid, Platform, Settings, Share, ToastAndroid, Vibration, Keyboard, PixelRatio, LayoutAnimation, SafeAreaView, StyleSheet, ActivityIndicator, Alert, Modal, RefreshControl, Slider, Switch } from 'react-native';
 
 const App = () => {
-  const [currentPlayer, setCurrentPlayer] = useState('X');
-  const [board, setBoard] = useState(Array(9).fill(null));
-  const [playerScores, setPlayerScores] = useState({ 'X': 0, 'O': 0, draws: 0 });
+  const [imageUrl, setImageUrl] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
-  const winningCombinations = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-  ];
+  useEffect(() => {
+    fetchImage();
+  }, []);
 
-  const checkWinner = () => {
-    for (let combination of winningCombinations) {
-      const [a, b, c] = combination;
-      if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-        return board[a];
+  const fetchImage = async () => {
+    try {
+      const response = await fetch('https://www.nvidia.com/content/dam/en-zz/Solutions/about-nvidia/board-of-directors/jensen-huang.jpg');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
       }
+      setImageUrl(response.url);
+    } catch (err) {
+      Alert.alert('Error', 'Failed to fetch image');
+      setError(true);
+    } finally {
+      setLoading(false);
     }
-    return null;
-  };
-
-  const handlePress = (index) => {
-    if (board[index] || checkWinner()) return;
-    const newBoard = [...board];
-    newBoard[index] = currentPlayer;
-    setBoard(newBoard);
-    const winner = checkWinner();
-    if (winner) {
-      Alert.alert('Game Over', `${winner} wins!`);
-      setPlayerScores((prev) => ({ ...prev, [winner]: prev[winner] + 1 }));
-      resetGame();
-    } else if (!newBoard.includes(null)) {
-      Alert.alert('Draw', 'It\'s a draw!');
-      setPlayerScores((prev) => ({ ...prev, draws: prev.draws + 1 }));
-      resetGame();
-    } else {
-      setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X');
-    }
-  };
-
-  const resetGame = () => {
-    setBoard(Array(9).fill(null));
-    setCurrentPlayer('X');
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="dark-content" />
-      <View style={styles.board}>
-        {board.map((cell, index) => (
-          <TouchableOpacity key={index} onPress={() => handlePress(index)} style={styles.cell}>
-            <Text style={[styles.text, cell === 'X' ? styles.xStyle : styles.oStyle]}>{cell}</Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-      <View style={styles.scoreboard}>
-        <Text style={styles.scoreText}>Player X: {playerScores['X']} Wins</Text>
-        <Text style={styles.scoreText}>Player O: {playerScores['O']} Wins</Text>
-        <Text style={styles.scoreText}>Draws: {playerScores.draws}</Text>
-      </View>
-      <TouchableOpacity onPress={resetGame} style={styles.resetButton}>
-        <Text style={styles.resetText}>Reset Game</Text>
-      </TouchableOpacity>
-    </SafeAreaView>
+    <View style={styles.container}>
+      {loading && !error ? (
+        <ActivityIndicator size="large" color="#0000ff" />
+      ) : error ? (
+        <Text style={styles.errorText}>Failed to load image</Text>
+      ) : (
+        <>
+          <Image source={{ uri: imageUrl }} style={styles.image} />
+          <Text style={styles.title}>Jensen Huang</Text>
+          <Text style={styles.subtitle}>CEO of NVIDIA</Text>
+        </>
+      )}
+    </View>
   );
 };
 
@@ -79,47 +48,26 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#ffffff',
   },
-  board: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    width: 200,
+  image: {
+    width: 300,
+    height: 300,
+    borderRadius: 150, // To make it a perfect square and circle for the portrait image provided
   },
-  cell: {
-    width: 66.67,
-    height: 66.67,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#ccc',
-  },
-  text: {
+  title: {
     fontSize: 24,
-  },
-  xStyle: {
-    color: 'red',
-  },
-  oStyle: {
-    color: 'blue',
-  },
-  scoreboard: {
+    fontWeight: 'bold',
     marginTop: 20,
-    alignItems: 'center',
+    color: '#000000',
   },
-  scoreText: {
+  subtitle: {
     fontSize: 18,
-    marginBottom: 5,
+    color: '#008000', // Green color for the title
   },
-  resetButton: {
-    marginTop: 20,
-    padding: 10,
-    backgroundColor: '#007AFF',
-    borderRadius: 5,
-  },
-  resetText: {
-    color: 'white',
-    fontSize: 16,
+  errorText: {
+    fontSize: 18,
+    color: '#000000',
   },
 });
 

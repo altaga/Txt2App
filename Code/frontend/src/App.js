@@ -6,6 +6,7 @@ import { ButtonGroup } from "@mui/material";
 import SmartphoneContainer from "./smartphoneContainer.js";
 import Loading from "./smartphone.js";
 import Building from "./smartphoneCreation.js";
+import { toast } from 'react-toastify';
 
 export default class App extends Component {
   constructor(props) {
@@ -14,11 +15,45 @@ export default class App extends Component {
       stage: 0,
       once: false,
       refresh: Math.random(),
-      loading: false, // false
+      loading: true, // false
       txt: "",
       response: "",
     };
   }
+
+    async componentDidMount(){
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append('pragma', 'no-cache');
+        myHeaders.append('cache-control', 'no-cache');
+        const requestOptions = {
+        method: "GET",
+        redirect: "follow",
+        headers: myHeaders,
+        };
+        fetch(`${window.location.href}api`, requestOptions)
+            .then(async (res) => {
+        if (res.status !== 200) {
+          return "Error";
+        } else {
+          return res.json();
+        }
+      }).then((result) => {
+        this.setState({
+          refresh: Math.random(),
+          loading: false,
+        });
+        toast.success("Server started successfully!", {
+        position: "top-center"
+      });
+      })
+      .catch((error) => {
+        toast.error("Server initialization failed!", {
+            position: "top-left"
+        });
+        this.setState({ refresh: Math.random(), loading: true });
+      });
+    }
 
   createApp() {
     this.setState({ loading: true });
@@ -46,7 +81,8 @@ export default class App extends Component {
           return res.json();
         }
       })
-      .then((result) => {
+      .then(async (result) => {
+        await fetch(`${window.location.href}render/`)
         this.setState({
           refresh: Math.random(),
           loading: false,
@@ -165,7 +201,10 @@ export default class App extends Component {
                 <Button
                   color="secondary"
                   style={{ fontFamily: "monospace" }}
-                  onClick={() => this.setState({ once: true })}
+                  onClick={async () => {
+                      await fetch(`${window.location.href}render/`)
+                      this.setState({ once: true })}
+                      }
                   key="four"
                 >
                   Show Last App

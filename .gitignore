@@ -128,3 +128,5 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+Code/Txt2App/android/app/debug.keystore
+Code/Txt2App/android/app/debug.keystore

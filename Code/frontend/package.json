@@ -17,6 +17,7 @@
     "react-jsx-parser": "^2.0.0",
     "react-native-web": "^0.19.12",
     "react-scripts": "5.0.1",
+    "react-toastify": "^10.0.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
