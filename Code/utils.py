@@ -1,8 +1,10 @@
 import re
 
+# Import necessary modules to ensure the app render and compiles correctly
 imports = "import { Animated, Button, View, Text, Image, TextInput, ScrollView, FlatList, SectionList, TouchableOpacity, TouchableHighlight, TouchableWithoutFeedback, Pressable, AppState, BackHandler, Dimensions, HapticFeedback, Linking, NativeModules, PermissionsAndroid, Platform, Settings, Share, ToastAndroid, Vibration, Keyboard, PixelRatio, LayoutAnimation, SafeAreaView, StyleSheet, ActivityIndicator, Alert, Modal, RefreshControl, Slider, Switch } from 'react-native';"
 
 def emptyprompt():
+    # If the user doesn't provide a prompt, use a default one to ensure the model receives an app description properly.
     return '''
     App Description: This app displays the image of Jensen Huang, the CEO of NVIDIA, from the official NVIDIA website. The app is designed to be simple and easy to use, with a focus on displaying the image in a clear and concise manner.
     
@@ -25,7 +27,10 @@ def emptyprompt():
     The app displays the CEO's title in green at the bottom of the image
     '''
 
-def preprocess(prompt): 
+def preprocess(prompt):
+    # Preprocess the prompt to ensure the model receives a clear and accurate app description.
+    # By following these guidelines, we make the prompt more understandable, reflecting the shift toward human-readable code as the next coding language. 
+
     preprocess_prompt = f'''
     Generate a complete React Native codebase for an app with the following description. The app description is as follows between triple quotes:
     ```
@@ -47,7 +52,8 @@ def preprocess(prompt):
     return preprocess_prompt
 
 def postprocess(prompt):
-    code = prompt["response"].replace("```jsx","").replace("```javascript", "").replace("```", "")
-    pattern = r"import\s+{[^}]*}\s+from\s+['\"]react-native['\"];\n?"
-    postprocess = re.sub(pattern, imports + "\n", code)
+    # Postprocess the result to ensure the UI can render and compile it correctly.
+    code = prompt["response"].replace("```jsx","").replace("```javascript", "").replace("```", "") # Remove the triple quotes if they exist
+    pattern = r"import\s+{[^}]*}\s+from\s+['\"]react-native['\"];\n?" 
+    postprocess = re.sub(pattern, imports + "\n", code) # Remove the default import statement and replace it with custom imports to avoid errors in the UI
     return postprocess
