@@ -9,7 +9,7 @@ Txt2App: Turn any idea into a fully functional mobile app, powered by LLM and Nv
 Hi!, if you are a judge and want to review the code and the Nvidia Ai Workbench Container here are the links:
 
 ### **Blog Post**: [Click here](https://github.com/altaga/Txt2App/blob/main/BlogPost.MD)
-### **Nvidia Ai Workbench Container**: [Contact us](pending...)
+### **Nvidia Ai Workbench Container**: [Only Judges](https://github.com/altaga/text-to-app)
 ### **Video Demo**: [OPEN VIDEO](https://youtu.be/td3Mna-yhlM)
 
 
