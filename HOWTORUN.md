@@ -36,6 +36,6 @@
 
 <img src="./Images/t9.png">
 
-- Finalmente cuando la app este completamente lista para usarse, se vera como aparece a continuacion, ahora si puedes empezar a crear cualquier app, aunque si dejas la casilla vacia, te crearemos una app de muestra.
+- Finally, when the app is completely ready to use, it will look like the one below. You can now start creating an app, although if you leave the box empty, we will create a sample app for you.
 
 <img src="./Images/t10.png">
