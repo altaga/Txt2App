@@ -32,7 +32,7 @@
 
 <img src="./Images/t8.png">
 
-- Finally, if everything goes well, your browser will open automatically with the web app, which may indicate that it is still loading as shown below.
+- If everything goes well, your browser will open automatically with the web app, which may indicate that it is still loading as shown below.
 
 <img src="./Images/t9.png">
 
