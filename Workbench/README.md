@@ -1,5 +1,7 @@
-# Project Name
+# Project name
 This project is Txt2App: Turn any idea into a fully functional mobile app, powered by LLM and Nvidia AI Workbench.
+
+This documentation is designed to be open within AI Workbench, on github the links may appear broken.
 
 ## Description
 
