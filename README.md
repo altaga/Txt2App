@@ -9,7 +9,7 @@ Txt2App: Turn any idea into a fully functional mobile app, powered by LLM and Nv
 Hi!, if you are a judge and want to review the code and the Nvidia Ai Workbench Container here are the links:
 
 ### **Blog Post**: [Click here](./BlogPost.MD)
-### **Nvidia Ai Workbench Container**: [FUNCTIONAL WORKBENCH](./Workbench/)
+### **Nvidia Ai Workbench Container**: [FUNCTIONAL WORKBENCH](./txt2app-workbench/)
 ### **Video Demo**: [OPEN VIDEO](https://youtu.be/td3Mna-yhlM)
 
 # Introduction:
@@ -196,7 +196,7 @@ We used the following LLM model to create code since it gave us the best results
 
 If you want to test only this model and operation, we leave you a Jupiter Notebook that you can run in the Nvidia AI Workbench to perform your own tests.
 
-- [TEST NOTEBOOK](./Workbench/Notebook/Text%20to%20App.ipynb)
+- [TEST NOTEBOOK](./txt2app-workbench/Notebook/Text%20to%20App.ipynb)
 
 # Frontend:
 
@@ -210,7 +210,7 @@ The app preview was done with a ReactJS library called `react-native-web` which 
 
 This code is available at the following path:
 
-- [CODE](./Workbench/code/app-render/src/)
+- [CODE](./txt2app-workbench/code/app-render/src/)
 
 ## Main UI:
 
@@ -220,7 +220,7 @@ The main UI of our application provides us with an easy way to access the prompt
 
 This code is available at the following path:
 
-- [CODE](./Workbench/code/frontend/src/)
+- [CODE](./txt2app-workbench/code/frontend/src/)
 
 # Build App Backend:
 
@@ -238,8 +238,8 @@ The app build process is done using the React Native framework version 0.73 alon
     ...
 
 This code is available at the following path:
-- [Package JSON](./Workbench/code/txt2app/package.json)
-- [CODE](./Workbench/code/txt2app/)
+- [Package JSON](./txt2app-workbench/code/txt2app/package.json)
+- [CODE](./txt2app-workbench/code/txt2app/)
 
 # Fastapi:
 
@@ -266,7 +266,7 @@ Due to the way Nvidia AI Workbench works we had to use a module called Uvicorn, 
         uvicorn.run(app=app, port=8080, host="0.0.0.0")
 
 This code is available at the following path:
-- [CODE](./Workbench/code/app.py)
+- [CODE](./txt2app-workbench/code/app.py)
 
 ## Ollama Server:
 
@@ -301,9 +301,9 @@ If the server is up and running correctly we can call the LLM model directly fro
         return {"result": webpage}
 
 This code is available at the following path:
-- [command.sh](./Workbench/code/command.sh)
-- [build.sh](./Workbench/code/build.sh)
-- [CODE](./Workbench/code/app.py)
+- [command.sh](./txt2app-workbench/code/command.sh)
+- [build.sh](./txt2app-workbench/code/build.sh)
+- [CODE](./txt2app-workbench/code/app.py)
 
 ## Static Website:
 
@@ -345,7 +345,7 @@ In order to correctly display the UI, the server needs to be able to deliver a s
         return templates2.TemplateResponse("index.html", {"request": request})
 
 This code is available at the following path:
-- [CODE](./Workbench/code/main.py)
+- [CODE](./txt2app-workbench/code/main.py)
 
 ## Build Android APK:
 
@@ -365,8 +365,8 @@ Finally, the last section of the APK we need to explore is the execution of the 
         return FileResponse("txt2app/android/app/build/outputs/apk/release/app-release.apk", filename="txt2app.apk")
 
 This code is available at the following path:
-- [buildApp.sh](./Workbench/code/buildApp.sh)
-- [CODE](./Workbench/code/main.py)
+- [buildApp.sh](./txt2app-workbench/code/buildApp.sh)
+- [CODE](./txt2app-workbench/code/main.py)
 
 # Txt2App:
 

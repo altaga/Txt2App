@@ -1,6 +1,0 @@
-jupyterlab>3.0
-ollama
-uvicorn
-fastapi
-pydantic
-starlette
