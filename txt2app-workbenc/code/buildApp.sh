@@ -1,0 +1,1 @@
+cd /project/code/Txt2App && npm run lint && npm run deploy
