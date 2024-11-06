@@ -4,6 +4,10 @@
 
 Txt2App: Turn any idea into a fully functional mobile app, powered by LLM and Nvidia AI Workbench.
 
+# How to run:
+
+Si deseas correr el Workbench en tu maquina porfavor sigue nuestra guia. [OPEN TUTORIAL](./HOWTORUN.md)
+
 # Fastlinks:
 
 Hi!, if you are a judge and want to review the code and the Nvidia Ai Workbench Container here are the links:
