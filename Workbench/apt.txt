@@ -1,0 +1,4 @@
+nodejs
+nano
+openjdk-17-jdk
+wget

@@ -1,0 +1,1 @@
+ps -ef | grep ollama | grep serve 
