@@ -6,7 +6,7 @@ Txt2App: Turn any idea into a fully functional mobile app, powered by LLM and Nv
 
 # How to run:
 
-## If you wish to run the Workbench on your machine follow this: [TUTORIAL](./HOWTORUN.md)
+### If you wish to run the Workbench on your machine follow this: [TUTORIAL HERE](./HOWTORUN.md)
 
 # Fastlinks:
 

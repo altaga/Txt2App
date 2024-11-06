@@ -1,12 +1,4 @@
-# Txt2App: Transforming Ideas into Mobile apps
-
-This is a tutorial to run the Ai Workbench on any machine.
-
-# IMPORTANT LINKS:
-
-### **Nvidia Ai Workbench Repository**: [READY TO CLONE REPO](https://github.com/altaga/txt2app-workbench)
-
-# Tutorial:
+# This is a tutorial to run the Ai Workbench on any machine.
 
 - Open your Nvidia Ai Workbench:
 
